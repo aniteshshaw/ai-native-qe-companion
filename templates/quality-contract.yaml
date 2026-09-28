@@ -1,0 +1,28 @@
+# Quality contract: from "Proving It Still Works".
+# A short spec that turns a capability into something you can test.
+# Fill each field, then delete these comments. Example values are illustrative.
+
+capability: <name>                  # e.g. rca_evidence_reviewer
+purpose: <one line: what this is for>
+
+allowed_inputs:
+  - <an input class the capability may receive>   # e.g. sanitized incident summary
+  - <another>                                      # e.g. approved log excerpts
+
+allowed_outputs:
+  - <what it is allowed to produce>                # e.g. evidence gaps
+  - <another>                                      # e.g. questions for the owner
+
+forbidden_outputs:                  # the outcomes it must never produce
+  - <e.g. assigning blame>
+  - <e.g. closing the incident>     # it advises; it does not decide
+  - <e.g. changing production data> # read-only unless a tier says otherwise
+
+required_evidence:
+  - <e.g. a quote or reference for every factual claim>
+
+human_decision: <who accepts or rejects each recommendation>
+
+limits:
+  latency_seconds_p95: <number>     # illustrative; set to your workflow's budget
+  maximum_tool_calls: <number>

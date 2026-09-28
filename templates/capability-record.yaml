@@ -1,0 +1,29 @@
+# Capability record: from "Governing AI Quality Systems".
+# The queryable record that makes ownership a technical control.
+# Store it next to the capability. Example values are illustrative.
+
+id: <namespace.type.name>           # e.g. qe.skill.rca-reviewer
+capability_owner: <team or person who maintains it>
+domain_owner: <who owns the business outcome and accepts the risk>
+operational_owner: <who runs monitoring, support, incidents, rollback>
+
+risk_tier: <1 | 2 | 3 | 4>          # see risk-tiers.md
+
+version: <semver>                   # e.g. 1.4.0
+approved_models:
+  - <organization-approved model family>
+approved_data:
+  - <the data classes it may use>
+
+allowed_tools:
+  - <tool>                          # least privilege; read-only by default
+forbidden_actions:
+  - <action it must never take>     # e.g. incident_close, production_write
+
+human_decision: <who makes the consequential call>
+kill_switch_owner: <who can disable it right now>
+rollback_version: <the last known-good version>
+
+last_evaluation: <YYYY-MM-DD>       # evidence lives in the evaluation scorecard
+next_review: <YYYY-MM-DD>
+retire_by: <YYYY-MM-DD or condition>

@@ -1,0 +1,22 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*~
+
+# Secrets and local settings
+.env
+.env.*
+*.pem
+*.key
+
+# Files you create while working through the lab
+labs/first-ai-qe-assistant/.github/
+labs/first-ai-qe-assistant/story-checks/*
+!labs/first-ai-qe-assistant/story-checks/.gitkeep
+
+# Dependencies
+node_modules/

@@ -1,0 +1,28 @@
+# Metric dictionary. Define every metric here before it reaches a dashboard.
+# Metric names sound clear while teams calculate them differently. The definition
+# is the metric. Values are illustrative.
+
+- metric: repeat_usage_rate
+  definition: >
+    Percentage of eligible users who used the capability in at least two distinct
+    eligible sessions during the reporting period.
+  numerator: users_with_two_or_more_eligible_sessions
+  denominator: users_with_at_least_one_eligible_session
+  exclusions:
+    - automated_service_identities
+    - test_executions
+    - duplicate_sessions
+  window: rolling_30_days
+  measurement_type: observed        # observed | derived | estimated | modeled | self_reported
+  owner: <team>
+  version: 1
+
+# Metrics that need an exact definition before use:
+#   invocation, capability_activation, session, active_user, repeat_user,
+#   active_repository, successful_tool_call, accepted_output, completed_workflow,
+#   session_duration, failure_rate, return_usage_rate, productivity_improvement
+#
+# Label the measurement type of each. An observed reduction in elapsed workflow
+# time is not the same as modeled hours saved. Both may be useful, but they answer
+# different questions, and they must never share a font, a color, or a level of
+# confidence on a dashboard.

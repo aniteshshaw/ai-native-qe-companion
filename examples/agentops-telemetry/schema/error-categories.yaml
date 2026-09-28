@@ -1,0 +1,58 @@
+# Governed error categories for agent telemetry.
+# Companion to the chapter "Workflow Hooks, the Nervous System".
+# Illustrative starting set. Adapt it to your runtime, then version every change.
+#
+# Rules:
+# - Map every raw provider or tool error to exactly one category before it is written.
+#   Never store the raw provider message; it can be inconsistent or contain sensitive detail.
+# - Add categories; do not repurpose one. A renamed or merged category is a new version.
+# - Keep "expected_refusal" and "security_denied" separate from reliability errors.
+#   Counting them as failures makes reliability numbers wrong.
+
+taxonomy_version: 1
+
+categories:
+  - id: permission_denied
+    kind: access
+    counts_as_reliability_failure: false
+    meaning: The caller lacked permission for the tool, resource, or action.
+
+  - id: security_denied
+    kind: security
+    counts_as_reliability_failure: false
+    meaning: A policy or security control blocked the action on purpose, for example a forbidden path or a blocked command.
+
+  - id: expected_refusal
+    kind: behavior
+    counts_as_reliability_failure: false
+    meaning: The model or capability declined a request it is designed to decline.
+
+  - id: timeout
+    kind: reliability
+    counts_as_reliability_failure: true
+    meaning: A call did not finish within its time budget.
+
+  - id: rate_limited
+    kind: reliability
+    counts_as_reliability_failure: true
+    meaning: A provider or service throttled the request.
+
+  - id: tool_error
+    kind: reliability
+    counts_as_reliability_failure: true
+    meaning: A tool ran and returned an error.
+
+  - id: network_error
+    kind: reliability
+    counts_as_reliability_failure: true
+    meaning: A dependency could not be reached.
+
+  - id: invalid_output
+    kind: quality
+    counts_as_reliability_failure: true
+    meaning: The output failed a deterministic check, such as schema validation.
+
+  - id: unknown
+    kind: triage
+    counts_as_reliability_failure: true
+    meaning: No mapping matched. Review these regularly and add a category when a pattern appears.

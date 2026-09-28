@@ -1,0 +1,6 @@
+# Synthetic, illustrative data. Not real. Twelve columns; each row must have twelve fields.
+schema_version,event_type,event_time_utc,session_id,user_id,capability_id,capability_version,tool_category,outcome,duration_ms,error_category,content_collected
+2,session_start,2026-09-09T14:02:10.001Z,sess-a1,uhash-01,,,,,,,false
+2,tool_completed,2026-09-09T14:02:12.987Z,sess-a1,uhash-01,rca_evidence_reviewer,1.4.0,repository_search,success,1863,,false
+2,tool_completed,2026-09-09T14:03:04.220Z,sess-a1,uhash-01,rca_evidence_reviewer,1.4.0,api_call,failure,412,RATE_LIMIT,false
+2,session_stop,2026-09-09T14:05:40.512Z,sess-a1,uhash-01,,,,,,,false

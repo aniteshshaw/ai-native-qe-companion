@@ -1,0 +1,6 @@
+# Synthetic, illustrative data. Each row is intentionally malformed to test a parser.
+schema_version,event_type,event_time_utc,session_id,user_id,capability_id,capability_version,tool_category,outcome,duration_ms,error_category,content_collected
+2,tool_completed,not-a-timestamp,sess-b2,uhash-02,cap,1.0.0,api_call,success,120,,false
+2,tool_completed,2026-09-09T14:10:00Z,sess-b2,uhash-02,cap,1.0.0,api_call,success,,,false
+,session_stop,2026-09-09T14:11:00Z,sess-b2,uhash-02,,,,,,,false
+2,tool_completed,2026-09-09T14:12:00Z,sess-b2,uhash-02,cap,1.0.0,repository_search,success,88,,false,extra_column

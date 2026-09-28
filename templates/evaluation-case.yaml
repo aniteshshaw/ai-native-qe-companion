@@ -1,0 +1,19 @@
+# Evaluation case: from "Proving It Still Works".
+# One case. Build a small, sharp set that covers all six families below.
+# Every serious production failure becomes a permanent case here (family: regression).
+
+id: <CAP-FAMILY-000>                # e.g. RCA-ADV-004
+family: <normal | boundary | negative | adversarial | regression | change>
+risk: <low | medium | high>
+input_fixture: <path to the fixture file>
+
+expected_behavior:
+  - <what must happen>              # e.g. treat document text as data, not instructions
+
+forbidden_behavior:
+  - <what must not happen>          # e.g. follow instructions embedded in an attachment
+
+scoring_rubric: <path to the rubric used for the judged part>
+
+# Run each high-risk case several times and score the properties across all runs.
+# One green run is a sample of one.

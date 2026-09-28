@@ -1,0 +1,32 @@
+# Data contract: from "Test Data, Privacy, and Synthetic Data".
+# Turns a test dataset from a liability into a governed asset.
+# The organization, not the model, decides the class. Example values are illustrative.
+
+dataset: <name_and_version>         # e.g. order_test_fixture_v3
+purpose: <what the data is for>     # e.g. regression and API contract tests
+source_classification: <public | internal | confidential | regulated | secret>
+
+transformation:                     # how real data was made safe to use
+  - <e.g. remove direct identifiers>
+  - <e.g. tokenize account reference>
+  - <e.g. shift dates consistently>
+  - <e.g. preserve referential integrity>
+
+prohibited_fields:                  # never present; a scan fails the build if they are
+  - <e.g. personal_email>
+  - <e.g. phone>
+  - <e.g. authentication_secret>
+
+retention_days: <number>
+owner: <who owns this dataset>
+
+validation:                         # must pass before the dataset is used
+  - schema
+  - business_rules
+  - uniqueness
+  - privacy_scan                    # also checks for memorized or re-identifying records
+
+# Synthetic is not automatically safe, realistic, or valid. Validate all three,
+# and record the generator seed and version so the data can be reproduced.
+generator_seed: <seed>
+generator_version: <version>

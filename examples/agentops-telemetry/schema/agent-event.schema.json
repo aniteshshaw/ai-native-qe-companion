@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent telemetry event (privacy-safe)",
+  "description": "A metadata-only lifecycle event. It never contains prompt text, response text, a secret, or business content. Generic and illustrative; adapt to your runtime.",
+  "type": "object",
+  "required": ["schema_version", "event_type", "event_time_utc", "session_id", "content_collected"],
+  "properties": {
+    "schema_version": { "type": "integer" },
+    "event_type": {
+      "type": "string",
+      "examples": ["session_start", "prompt_submitted", "capability_activated", "tool_completed", "subagent_stopped", "error", "artifact_produced", "human_decision_recorded", "session_stop"]
+    },
+    "event_time_utc": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string", "description": "Randomized per session. Not derived from a username." },
+    "user_id": { "type": ["string", "null"], "description": "Keyed pseudonymous identifier, for example an HMAC. Never a raw or unsalted-hashed username." },
+    "capability_id": { "type": ["string", "null"] },
+    "capability_version": { "type": ["string", "null"] },
+    "tool_use_id": { "type": ["string", "null"], "description": "Pairs one tool request with its result." },
+    "parent_agent_id": { "type": ["string", "null"], "description": "Connects delegated work to the parent agent." },
+    "artifact_id": { "type": ["string", "null"], "description": "Connects activity to a pull request, work item, test run, or release. Only when the purpose is documented." },
+    "tool_category": { "type": ["string", "null"] },
+    "outcome": { "type": ["string", "null"], "enum": ["success", "failure", null] },
+    "duration_ms": { "type": ["integer", "null"] },
+    "error_category": { "type": ["string", "null"], "description": "A governed, versioned category from error-categories.yaml, not a raw provider string." },
+    "content_collected": { "const": false, "description": "Must always be false." }
+  },
+  "additionalProperties": false
+}
