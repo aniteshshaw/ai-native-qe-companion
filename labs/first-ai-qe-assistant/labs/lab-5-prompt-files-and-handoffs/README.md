@@ -8,7 +8,11 @@ Previous: [Lab 4](../lab-4-instruction-file/README.md) | [Overview](../../README
 |---|---|
 | The files | A prompt file is a saved work order. A handoff is a button that passes work from one agent to another. |
 | Where they live | `.github/prompts/story-check.prompt.md`, and `handoffs:` inside agent files |
-| When they load | The prompt file runs when you type `/story-check`. Handoff buttons appear after an agent answers. |
+| When they load | The prompt file runs when you type `/story-check`. Handoff buttons appear under an agent's answer once it finishes. |
+
+> **Before you start:** handoff buttons only work in the **Local** harness.
+> Start every chat in this lab with **Session Target** set to **Local**. In
+> another harness the buttons never appear, even when every file is correct.
 
 The idea is a maker and a checker. The Checker writes. The Reviewer reads, and
 has no tool to write with.
@@ -77,12 +81,27 @@ Check story **${input:storyId:US-203}**.
 
 ## Prove it loaded
 
-1. Start a new chat and type `/story-check`. Enter `US-203`.
+1. Start a new chat with **Session Target** set to **Local**. Type `/story-check`
+   and enter `US-203`. If it does not ask you for a value, type
+   `/story-check US-203` instead.
 2. The Checker saves `story-checks/US-203-check.md`. Click **Keep**.
-3. Click **Send to Reviewer**. Read the verdict. Did it catch the rules in the
-   Notes section?
-4. Click **Send fixes to Checker**. The Checker updates the note.
+3. Wait for the Checker's answer to finish. A **Send to Reviewer** button appears
+   under it. Click it, then press Enter to send the prompt it fills in. Read the
+   verdict. Did it catch the rules in the Notes section?
+4. Click **Send fixes to Checker** under the Reviewer's answer, and press Enter.
+   The Checker updates the note.
 5. Click **Send to Reviewer** again. The verdict should now be **Ready**.
+
+**If no button appears,** check these in order:
+
+1. The chat's **Session Target** is **Local**.
+2. The answer has finished. Buttons appear only after it does.
+3. You started a new chat after your last change to an agent file.
+4. If you started with `/story-check`, try the other way in: choose
+   **story-checker** from the agent picker and type `US-203`. The buttons belong
+   to the agent that answered.
+5. The `handoffs:` block is indented exactly as shown, and `agent:` matches the
+   target file name without `.agent.md`.
 
 ## Break it on purpose
 
@@ -91,8 +110,9 @@ Check story **${input:storyId:US-203}**.
    button, and you lose the moment where you read the prompt before it goes.
 3. Change it back.
 
-Then try a typo: change `agent: story-reviewer` to `agent: story-review`. The
-handoff button breaks or disappears. Fix it.
+Then try a typo: change `agent: story-reviewer` to `agent: story-review`, start a
+new chat, and run the workflow. The handoff cannot find its agent: depending on
+your VS Code version, the button is missing or the switch fails. Fix it.
 
 ## What it cannot do
 

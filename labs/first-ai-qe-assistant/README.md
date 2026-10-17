@@ -16,9 +16,9 @@ on the files and how they behave.
 |---|---|
 | Time | About 90 minutes |
 | Level | Beginner. No coding needed. |
-| You need | VS Code, GitHub Copilot with Agent mode, this folder |
+| You need | VS Code, GitHub Copilot, this folder. Every chat runs in the **Local** harness (see *Before you start*). |
 | Practice app | Riverside Library Room Booking. Fictional, with fictional data. |
-| Last verified | TBD (date, VS Code version, and GitHub Copilot version to be recorded after a dry run) |
+| Last verified | Checked against the VS Code documentation on 2026-10-17, after tester feedback. A full dry run is still to come: record the date, VS Code version, and GitHub Copilot version here when it is done. |
 
 > Product features change. If a step no longer matches your screen, check the
 > official VS Code and GitHub Copilot documentation. The ideas in the book stay
@@ -110,7 +110,12 @@ a missing tool actually stops it.** Every lab will show you where that line sits
    the `.github` folder at the top of the folder you open.
 2. Choose one model and keep it for every lab. Different models give different
    answers, and you want to see the effect of the files, not the model.
-3. Confirm there is **no** `.github` folder here yet. You will build it.
+3. **Use the Local harness in every chat.** When you start a new chat, open the
+   **Session Target** control and choose **Local** before you type anything.
+   The labs use features that only the Local harness supports: handoff buttons
+   (Lab 5) and the tool names in the agent files (Labs 3 and 5). If you don't see
+   a Session Target control, your VS Code has only one harness, so skip this step.
+4. Confirm there is **no** `.github` folder here yet. You will build it.
 
 ---
 
@@ -146,10 +151,11 @@ Change the folder name to the lab you just missed. Start a new chat afterwards.
 
 | Symptom | Check |
 |---|---|
-| The skill never loads | Does the folder name equal `name:`? Is `.github` at the top of the folder you opened? Did you start a new chat? |
+| The skill never loads | Is `SKILL.md` inside `.github/skills/<folder>/`? Is `name:` only lowercase letters, numbers, and hyphens? Does the description use the words in your request? Did you start a new chat? |
 | A different skill answers | Other skills installed on your machine may match. Call `/room-story-check` directly, or use a clean VS Code profile. |
 | The agent is missing from the picker | The file must end in `.agent.md` and sit in `.github/agents/`. |
-| Handoff buttons are missing | Check the YAML indentation. `agent:` must match the target file name without `.agent.md`. |
+| Handoff buttons are missing | Is the chat's **Session Target** set to **Local**? Handoffs only work there. Did the answer finish? The buttons appear only after it does. Then check the YAML indentation, and that `agent:` matches the target file name without `.agent.md`. |
+| Removing `edit` does not stop the agent from saving | Set **Session Target** to **Local** and start a new chat. Other harnesses use different tool names. |
 | `/story-check` is missing | The file must sit in `.github/prompts/` and end in `.prompt.md`. |
 | House rules are ignored | The file must be exactly `.github/copilot-instructions.md`. |
 | Files appeared during Lab 1 | You were in Agent mode, not Ask mode. Undo them and switch modes. |

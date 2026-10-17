@@ -9,6 +9,9 @@ until Lab 6 is finished, because it contains the answer key.
 - Record the date, VS Code version, and Copilot version in the lab README.
 - Announce one model for everyone and ask people to keep it for every lab.
 - Prepare a clean VS Code profile, or a way to switch off unrelated skills.
+- Check that every machine shows **Local** in the **Session Target** control of a new
+  chat. Handoff buttons (Lab 5) and the agent tool names (Labs 3 and 5) only work
+  in the Local harness.
 - Plan one helper for every ten people.
 
 ## Run of show (90 minutes)
@@ -45,10 +48,10 @@ Rotate the driver and navigator every lab.
 |---|---|
 | 0 | "Who got a description of a file that does not exist?" |
 | 1 | "Who had a new chat remember the story?" (Nobody should.) |
-| 2 | "Who saw `SKILL.md` load without naming it? Now, who broke it by renaming the folder?" |
+| 2 | "Who saw `SKILL.md` load without naming it? Who stopped it loading by changing only the description? So which field decides when a skill loads?" |
 | 3 | "Removing `edit` stopped the agent. The written rule only asked it to stop. Which one would you trust?" |
 | 4 | Two tables read their question IDs aloud before and after the file. They now match. |
-| 5 | "What changed when `send` was `true`? What did you stop doing?" |
+| 5 | Before the lab, check every table has **Session Target** set to **Local**. Then: "What changed when `send` was `true`? What did you stop doing?" |
 | 6 | Collect answers to "Which rows would survive a model that ignores every instruction?" |
 
 ## Lab 6 answer key

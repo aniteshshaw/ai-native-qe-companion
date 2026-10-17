@@ -55,8 +55,8 @@ A playbook for reading one user story carefully before anyone designs tests.
 
 | Part | Why it is there |
 |---|---|
-| `name` | The skill's unique handle. It **must** match the folder name. It also becomes the slash command `/room-story-check`. |
-| `description` | The label on the shelf. Copilot compares requests against it, so it must use the words people really type. |
+| `name` | The skill's handle. It becomes the slash command `/room-story-check`. Use only lowercase letters, numbers, and hyphens. Keep it the same as the folder name (see the note in *Break it on purpose*). |
+| `description` | The label on the shelf. Copilot compares requests against it, so it must use the words people really type. The description, not the folder name, decides whether the skill loads by itself. |
 | Steps | The prompt from Lab 1, written down once. |
 | Template link | Loaded only when the skill runs, which keeps the skill small until it is needed. |
 | "Do not invent rules" | The most important quality rule for any AI helper that reads requirements. |
@@ -64,21 +64,46 @@ A playbook for reading one user story carefully before anyone designs tests.
 
 ## Prove it loaded
 
-1. Start a new chat in Agent mode.
+1. Start a new chat in Agent mode, with **Session Target** set to **Local**.
 2. Type only: `Check the Riverside Library story US-202`
-3. Near the top of the answer, look for Copilot reading `SKILL.md`. That is the
-   playbook coming off the shelf.
+3. Near the top of the answer, look for a step that shows Copilot read `SKILL.md`.
+   It may be inside the collapsed list of steps. That is the playbook coming off
+   the shelf.
 4. Now call it by name: `/room-story-check US-202`.
 
 ## Break it on purpose
 
-1. Rename the folder to `room-story-checker`, but leave `name: room-story-check`
-   inside the file.
-2. Start a new chat and repeat step 2 above.
-3. The skill no longer loads. Rename the folder back.
+**Experiment 1: change the label on the shelf.**
+
+1. In `SKILL.md`, replace the description with this one:
+   `description: "Formats release notes for the Riverside Library app. Use when the user asks for release notes."`
+2. Start a new chat and type `Check the Riverside Library story US-202`.
+3. Copilot answers without reading `SKILL.md`. Your request no longer matches the
+   label, so the playbook stays on the shelf.
+4. Now type `/room-story-check US-202`. The skill runs, because the slash command
+   comes from the `name`, not from the description.
+5. Put the original description back.
+
+This shows the two jobs. The **description** decides when Copilot picks the
+skill by itself. The **name** is the handle you call it by.
+
+**Experiment 2: break the name.**
+
+1. Change `name: room-story-check` to `name: Room Story Check`. Capitals and
+   spaces are not allowed in a skill name.
+2. Start a new chat and type `/`. The `/room-story-check` command is gone. The
+   skill also stops loading for `Check the Riverside Library story US-202`.
+   VS Code skips a skill with an invalid name and shows no error, so a typo here
+   fails silently.
+3. Put the name back.
 
 Then try a request that does **not** match the description, such as
 `Summarise the app overview`. The skill should stay on the shelf.
+
+> **What about the folder name?** You may read that the folder must have the
+> same name as `name:`. The Agent Skills standard says so. But when testers
+> renamed the folder, VS Code still loaded the skill (October 2026). Keep the
+> two the same anyway, because other tools that read skills do enforce it.
 
 ## What it cannot do
 
